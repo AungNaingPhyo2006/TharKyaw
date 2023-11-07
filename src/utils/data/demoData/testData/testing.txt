@@ -1,0 +1,39 @@
+import { StyleSheet, ScrollView,Text, View } from 'react-native'
+import React from 'react'
+import yangon from '../../../utils/data/yangon'
+const Exam = () => {
+// console.warn(yangon)
+
+
+  return (
+    <View style={{flex:1 , marginHorizontal:12}}>
+    <Text>Yangon</Text>
+
+  {yangon.map(i => (
+    <ScrollView style={{marginBottom:20}}>
+     <Text>{i.academic_year}</Text>
+     {i.chapter.map(i => (
+       <>
+       <Text>{i.name}</Text>
+      <Text>{i.level}</Text>
+      {
+        i.question.map(i => (
+          <>
+          <Text key={i.index}>{i.name}</Text>
+          <Text key={i.index}>{i.answer}</Text>
+
+          </>
+        ))
+      }
+      </>
+     ))}
+     </ScrollView>
+  ))}
+
+    </View>
+  )
+}
+
+export default Exam
+
+const styles = StyleSheet.create({})

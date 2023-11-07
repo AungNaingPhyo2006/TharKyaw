@@ -1,0 +1,198 @@
+{
+    "Academic": [
+      {
+        "id": 1,
+        "name": "2023",
+        "category": {
+          "id": 1,
+          "name": "Yangon",
+          "image": "ImageUrl"
+        },
+        "chapter": [
+          {
+            "id": 1,
+            "name": "Vinaya",
+            "level": {
+              "id": 1,
+              "name": "Beginner"
+            },
+            "questions": [
+              {
+                "id": 1,
+                "name": "Question 1",
+                "answer": {
+                  "id": 1,
+                  "name": "Answer 1"
+                }
+              },
+              {
+                "id": 2,
+                "name": "Question 2",
+                "answer": {
+                  "id": 2,
+                  "name": "Answer 2"
+                }
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "name": "Vinaya",
+            "level": {
+              "id": 1,
+              "name": "Elementary"
+            },
+            "questions": [
+              {
+                "id": 1,
+                "name": "Question 1",
+                "answer": {
+                  "id": 1,
+                  "name": "Answer 1"
+                }
+              },
+              {
+                "id": 2,
+                "name": "Question 2",
+                "answer": {
+                  "id": 2,
+                  "name": "Answer 2"
+                }
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "name": "Vinaya",
+            "level": {
+              "id": 1,
+              "name": "Intermediate"
+            },
+            "questions": [
+              {
+                "id": 1,
+                "name": "Question 1",
+                "answer": {
+                  "id": 1,
+                  "name": "Answer 1"
+                }
+              },
+              {
+                "id": 2,
+                "name": "Question 2",
+                "answer": {
+                  "id": 2,
+                  "name": "Answer 2"
+                }
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "name": "Inguttara",
+            "level": {
+              "id": 1,
+              "name": "Beginner"
+            },
+            "questions": [
+              {
+                "id": 1,
+                "name": "Question 1",
+                "answer": {
+                  "id": 1,
+                  "name": "Answer 1"
+                }
+              },
+              {
+                "id": 2,
+                "name": "Question 2",
+                "answer": {
+                  "id": 2,
+                  "name": "Answer 2"
+                }
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "name": "Inguttara",
+            "level": {
+              "id": 1,
+              "name": "Elementary"
+            },
+            "questions": [
+              {
+                "id": 1,
+                "name": "Question 1",
+                "answer": {
+                  "id": 1,
+                  "name": "Answer 1"
+                }
+              },
+              {
+                "id": 2,
+                "name": "Question 2",
+                "answer": {
+                  "id": 2,
+                  "name": "Answer 2"
+                }
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "name": "Inguttara",
+            "level": {
+              "id": 1,
+              "name": "Intermediate"
+            },
+            "questions": [
+              {
+                "id": 1,
+                "name": "Question 1",
+                "answer": {
+                  "id": 1,
+                  "name": "Answer 1"
+                }
+              },
+              {
+                "id": 2,
+                "name": "Question 2",
+                "answer": {
+                  "id": 2,
+                  "name": "Answer 2"
+                }
+              }
+            ]
+          },
+          {
+            "id": 7,
+            "name": "Dhammapada",
+            "level": {
+              "id": 1,
+              "name": "Beginner"
+            },
+            "questions": [
+              {
+                "id": 1,
+                "name": "Question 1",
+                "answer": {
+                  "id": 1,
+                  "name": "Answer 1"
+                }
+              },
+              {
+                "id": 2,
+                "name": "Question 2",
+                "answer": {
+                  "id": 2,
+                  "name": "Answer 2"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  
