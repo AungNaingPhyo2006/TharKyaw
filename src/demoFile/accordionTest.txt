@@ -1,0 +1,284 @@
+
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  RefreshControl,
+  Flatlist,
+} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import deviceInfoModule from 'react-native-device-info';
+import {useTheme} from '@react-navigation/native';
+import festivalStyles from '../FestivalStyles';
+import Header from '../../../components/Header';
+import {moderateScale} from '../../../utils/SizeMatters';
+import {useTranslation} from 'react-i18next';
+import {useShallow} from 'zustand/react/shallow';
+import {AppStore} from '../../../constants/zustand';
+import AppContext from '../../../constants/AppContext';
+import Post from '../../../utils/ReactQueryUtils';
+import {useQuery} from 'react-query';
+import Loading from '../../../components/Loading';
+import Collapsible from 'react-native-collapsible';
+import APIUtils from '../../../utils/APIUtils';
+import {KPformatDateTime} from '../FestivalFunctions'
+import { CaretDown, CaretUp } from 'phosphor-react-native';
+
+const NewTicketHistory = ({navigation}) => {
+  const {colors} = useTheme();
+  const styles = festivalStyles();
+  const {t} = useTranslation();
+  const {isOnline} = useContext(AppContext);
+  const {lang, token} = AppStore(
+    useShallow(state => ({
+      lang: state.lang,
+      token: state.token,
+    })),
+  );
+
+  const [refreshing, setRefreshing] = useState(false);
+  const [activeItem, setActiveItem] = useState(null);
+  const [batchList, setBatchList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    FestivalListRefetch();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
+useEffect(()=> {
+  console.log('Hi')
+ // setRefreshing(true);
+  FestivalListRefetch();
+},[mockData])
+
+  //   Api
+  const getFestivalList = async () => {
+    if (!isOnline) {
+      return null;
+    }
+    const data = await Post('ticket/FestivalListForReceipt', lang, token, {});
+
+    if (data.respCode == 200) {
+      
+      return data.respData.map(obj=>{
+       return {...obj,isExpanded:false}
+      });
+    } else if (data.respCode == 'I0062') {
+      return data.respData;
+    } else if (data.respCode == 'I0061') {
+      Alert.alert('', data.respDescription);
+      return data.respData;
+    } else {
+      Alert.alert('', data.respDescription);
+    }
+  };
+  const {
+    data: FestivalList,
+    isLoading: FestivalListLoading,
+    refetch: FestivalListRefetch,
+  } = useQuery('getFestivalList', getFestivalList, {
+    onError: err => console.error('get festval list', err),
+  });
+
+
+   //console.warn('FES=>',FestivalList)
+  const handleCollapse =async (id) => {
+    setActiveItem(activeItem == id ? null : id);
+    await APIUtils.post(
+      'ticket/BatchListForReceipt',
+      token,
+      lang,
+      JSON.stringify({festivalId: id}),
+      async (err, resp) => {
+        if(err){
+          console.error('get batch list err', err)
+        }
+        if(resp.respCode == 200){
+          console.log('batch list resp', resp.respData)
+          setBatchList(resp.respData)
+        }
+      }
+    )
+  };
+  // console.warn(FestivalList)
+    // <=======Testing======>
+ // const [isExpanded, setIsExpanded] = useState([]);
+
+ 
+ const [mockData,setMockData] =useState(FestivalList)
+
+ const toggleExpand =async (id) => {
+   setMockData(mockData.map(obj=>{
+     if(obj.Id === id){
+       return {...obj, "isExpanded":!obj.isExpanded};
+     }
+     return obj;
+   }))
+
+   await APIUtils.post(
+    'ticket/BatchListForReceipt',
+    token,
+    lang,
+    JSON.stringify({festivalId: id}),
+    async (err, resp) => {
+      if(err){
+        console.error('get batch list err', err)
+      }
+      if(resp.respCode == 200){
+        console.log('batch list resp', resp.respData)
+        setBatchList(resp.respData)
+      }
+    }
+  )
+ };
+ // <=======Testing End======>
+  // <===========>
+  const handleReceiptHistory = (EncryptedValue) => {
+   navigation.navigate('NewReceiptHistory', {EncryptedValue: EncryptedValue})
+  }
+  return (
+    <SafeAreaView style={{flex: 1}}>
+      <View
+        style={{
+          ...styles.iconContainer,
+          zIndex: 10,
+          // position: 'absolute',
+          justifyContent: 'center',
+          alignItems: 'center',
+          left: 10,
+          top: 0,
+        }}>
+          <Loading isLoadingModelShow={loading}/>
+        <TouchableOpacity
+          style={{
+            position: 'absolute',
+            top: deviceInfoModule.isTablet()
+              ? -40
+              : Platform.OS === 'ios'
+              ? -35
+              : -30,
+            left: -10,
+            right: 0,
+            // paddingTop: Platform.OS === 'ios' ? 0 : 0,
+          }}>
+          <Header />
+        </TouchableOpacity>
+      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
+        <Text
+          style={{
+            ...styles.title,
+            fontSize: 20,
+            marginTop: moderateScale(deviceInfoModule.isTablet() ? 30 : 50),
+            marginLeft: 16,
+            fontSize: 28,
+          }}>
+          {t('TicketHistory')}
+        </Text>
+
+        <View style={styles.ticketHistoryFestivalList}>
+
+   {/* <==========Testing Start=======>*/}
+   {FestivalListLoading ? (
+    <Loading isLoadingModelShow={FestivalListLoading} />
+  ) : (
+     <>
+              {mockData?.map(item => (
+                                          
+                <>
+                <TouchableOpacity 
+                activeOpacity={1}
+                key={item.Id.toString()}
+                onPress={()=>toggleExpand(item.Id)}
+                style={styles.arrowContainer}>
+                        <Text
+                        style={styles.arrowFestivalTitle}>
+                        {item.Name}
+                      </Text>
+                <View style={{ justifyContent:'center'}}>
+                {item.isExpanded ? (
+                  <CaretUp
+                  size={23}
+                  color={colors.secondary}
+                  weight={'bold'}
+                />
+                ) : (
+                  <CaretDown
+                  size={23}
+                  color={colors.secondary}
+                  weight={'bold'}
+                />
+                )} 
+                </View>
+                </TouchableOpacity>
+
+                {item.isExpanded && (
+                <View style={{}}>
+
+               { batchList.map((batchItem) => (
+                  <TouchableOpacity style={{...styles.batchBtn, marginTop: 9, backgroundColor:colors.secondary
+    }} key={batchItem.BatchId}
+                  onPress={() => {handleReceiptHistory(batchItem.EncryptedValue)}}
+                  >
+                    <Text style={styles.text}>Batch {batchItem.BatchId}</Text>
+                    <Text style={styles.text}>Bought Date: {KPformatDateTime(batchItem.BuyDate)}</Text>
+                  </TouchableOpacity>
+                )) }
+
+                </View>
+                )}
+                </>
+                ))}
+                </>
+        ) }                  
+   {/* <========Testing End==========> */}
+     {/*
+          {FestivalListLoading ? (
+            <Loading isLoadingModelShow={FestivalListLoading} />
+          ) : (
+            FestivalList.map(item => (
+              <>
+                <TouchableOpacity
+                  style={styles.ticketHistoryFestivalButton}
+                  key={item.Id.toString()}
+                  onPress={() => {
+                    handleCollapse(item.Id);
+                  }}>
+                  <Text style={styles.title}>{item.Name}</Text>
+                  <Collapsible collapsed={activeItem !== item.Id}>
+                  {
+                    
+                    batchList.map((batchItem) => (
+                      <TouchableOpacity style={{...styles.batchBtn, marginTop: 16}} key={batchItem.BatchId}
+                      onPress={() => {handleReceiptHistory(batchItem.EncryptedValue)}}
+                      >
+                        <Text style={styles.text}>Batch {batchItem.BatchId}</Text>
+                        <Text style={styles.text}>Bought Date: {KPformatDateTime(batchItem.BuyDate)}</Text>
+                      </TouchableOpacity>
+                    ))
+                  }
+                </Collapsible>
+                </TouchableOpacity>
+                
+              </>
+            ))
+          )}
+      */}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+export default NewTicketHistory;

@@ -107,6 +107,11 @@ const LoginScreen = ({navigation}) => {
 
 // Handle user login
 
+const mockData = [
+ {moti : `(၁)အနေလည်းကောင်း၊ စိတ်လည်းကောင်း၍၊ ကောင်းကောင်းပညာ၊ တတ်မှသာ၊ ငါဟာ ကြီးပွားမည်။`},
+ {moti : `(၂)အနေမကောင်း၊ စိတ်မကောင်း၍၊ ကောင်းကောင်းပညာ၊ မတတ်ပါ၊ ငါဟာ ဆုတ်ယုတ်မည်။`},
+ {moti : `(၃)စိတ်ကောင်းစာတတ်၊ အကျင့်မြတ်၊ လိုအပ် သာသနာ။`},
+];
 const handleSubmitPress = async () => {
   navigation.replace('HomeScreen');
 return;
@@ -188,31 +193,32 @@ return;
                 }}
               />
             </View>
-         
-            <View style={{marginHorizontal:12, alignItems:'center',marginTop:12}}>
-               <AnpTextAnimation/>
-            </View>
- 
+          
              <View style={{ marginHorizontal:12, padding:15, alignItems:'center'}}>
-             <Text style={{color:'yellow'}}>သာမဏေကျော် မေးခွန်းဟောင်းများ စုစည်းမှု</Text>
+             <Text style={{color:'yellow', fontSize:18,marginBottom:12, fontWeight:'bold'}}>သာမဏေကျော် မေးခွန်းဟောင်းများ</Text>
+             <Text style={{color:'yellow', fontSize:18,}}>စုစည်းမှု</Text>
+
+             <View style={{ marginTop:12}}>
+             {mockData.map((item, index) => (
+              <Text key={index.toString()} style={{color:'#fff', textAlign:'justify', marginTop:12}}>{item.moti}</Text>
+             ))}
+           </View>
              </View>
-             <View style={styles.SectionStyle}>
-             <Text style={styles.inputStyle}>
-             စိတ်ကောင်းစာတတ်၊ အကျင့်မြတ်၊ {`\n`}လိုအပ် သာသနာ။ 
-           </Text>
-        </View>
+           
             
              
 
             <View style={{marginTop:10}}>
-              <AnpButton onPress={handleSubmitPress} title="Continue"/>
+              <AnpButton onPress={handleSubmitPress} title="ဆက်ရန်"/>
             </View>
             <Text
               style={styles.registerTextStyle}
               onPress={() => navigation.navigate('RegisterScreen')}>
               မှတ်မှတ်သားသား စာစကား
             </Text>
-          
+            <View style={{marginHorizontal:12, alignItems:'center',marginTop:30}}>
+            <AnpTextAnimation/>
+         </View>
         </View>
       </ScrollView>
     </View>

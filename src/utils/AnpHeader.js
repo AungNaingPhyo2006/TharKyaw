@@ -1,4 +1,4 @@
-import {ArrowLeftCircle } from 'lucide-react-native';
+import { ChevronLeft,} from 'lucide-react-native';
 import React from 'react';
 import { TouchableOpacity, Text, Animated ,View} from 'react-native';
 import {fontSizes, colors } from './AnpStyleConfig';
@@ -20,7 +20,7 @@ const AnpHeader = ({ onPress, title, buttonPosition }) => {
         activeOpacity={0.5}
         onPress={()=> navigation.goBack()}
       >
-       <ArrowLeftCircle size={30} color={colors.backArrow}/>
+       <ChevronLeft size={30} color={colors.backArrow}/>
      
           <View style={{width:'70%',alignItems:'center',marginLeft:12}}>
         <Text style={{ color:colors.header,fontWeight:'bold', fontSize: fontSizes.large }}>

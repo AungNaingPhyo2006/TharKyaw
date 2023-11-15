@@ -2,7 +2,14 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet,TouchableOpacity ,Image} from 'react-native';
 import { mmConvert2en } from '../constants/mmConvert2en';
-const AnpCard = ({ year,name,level, title,toNavigate, data,extraData,vipData, image}) => {
+import { ChevronDown } from 'lucide-react-native';
+const AnpCard = ({ 
+  year,name,level, 
+  title,toNavigate,
+   data,extraData,vipData,
+    image,org ,orgTitle,
+    levelCheck,levelTitle,
+  }) => {
 const navigation = useNavigation();
 const navigateToScreen = () => {
   navigation.navigate(toNavigate, { data ,extraData, vipData});
@@ -10,13 +17,15 @@ const navigateToScreen = () => {
 
   return (
     <TouchableOpacity style={styles.card} onPress={navigateToScreen}> 
-    <View style={{  flexDirection:image ?'row' : '' , }}>
-    {image && (
-      <View style={{ }}>
-      <Image source={image} style={{ width:60,height:60,marginVertical:5 ,marginRight:12}} />
-   </View>
-    )}
+    <View style={{  }}>
+    {image && org ?  (
+      <View style={{  alignItems:'center',}}>
+      <Image source={image} style={{ width:90,height:90,marginVertical:5 ,marginRight:12}} />
+      <Text style={styles.cardTitle}>{orgTitle}</Text>
+     </View>
+    ) : (<></>)}
     
+   
     {year && (
       <Text style={styles.cardTitle}>{mmConvert2en(year)} ခုနှစ် မေးခွန်း</Text>
     )}
@@ -43,8 +52,10 @@ const styles = StyleSheet.create({
    paddingVertical:20,
    paddingHorizontal: 6,
     margin: 8,
+    elevation:5,
   },
   cardTitle: {
+    marginTop:9,
     color:'blue',
     fontSize: 18,
     textAlign:'justify',

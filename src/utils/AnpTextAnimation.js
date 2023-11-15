@@ -1,13 +1,12 @@
 import React, {useEffect, useRef} from 'react';
 import {Animated, Easing, Text, View} from 'react-native';
 
-const characters = 'Namo Buddhassa!';
+const characters = 'Developed by Aung Naing Phyo';
 
 const ShowChar = ({char, translateY}) => {
   return (
     <Animated.Text
       style={{
-        fontSize:24,
         color:'white',
        // color: '#278BCB',
         marginLeft: 3,

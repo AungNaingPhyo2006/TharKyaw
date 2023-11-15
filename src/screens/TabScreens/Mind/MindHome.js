@@ -9,16 +9,16 @@ import { MANDALAY_IMAGE, YANGON_IMAGE } from '../../../constants/ImageConstant';
 const MindHome = ({navigation}) => {
 
   const data = [
-    { id: '1', title: 'သကျသီဟအသင်း',
+    { id: '1', title: 'သကျသီဟ သာမဏေကျော် အသင်း',
     name : 'Mandalay' ,toNavigate : 'Levels', image : MANDALAY_IMAGE},
-    { id: '2', title: 'သာသနာ့ဝန်ဆောင်အသင်း' ,
+    { id: '2', title: 'ရန်ကုန် သာသနာ့ဝန်ဆောင် သာမဏေကျော် အသင်း' ,
     name : 'Yangon',toNavigate : 'Levels' , image: YANGON_IMAGE},
     // { id: '3', title: 'Go to MinLinDa' ,toNavigate : 'MiLinDa'},
     // { id: '4', title: 'Go to PaThaNa' ,toNavigate : 'PaThaNa'},
   ];
 
   const renderCard = ({ item }) => (
-    <AnpCard title={item.title} toNavigate={item.toNavigate} data={item.name} image={item.image}/>
+    <AnpCard orgTitle={item.title} toNavigate={item.toNavigate} data={item.name} image={item.image} org={true}/>
   );
   return (
     <View style={{flex:1}}>
