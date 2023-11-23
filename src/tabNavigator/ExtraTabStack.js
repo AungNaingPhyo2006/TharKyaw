@@ -1,14 +1,20 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Alert, StyleSheet, Text, View } from 'react-native'
+import React, { useCallback } from 'react'
+import { useFocusEffect } from '@react-navigation/native';
 
-const CoinTabStack = () => {
+const ExtraTabStack = () => {
+  useFocusEffect(
+    useCallback(() => {
+      Alert.alert('Under Development!');
+    }, [])
+  );
   return (
-    <View>
-      <Text>Testing Page</Text>
+    <View style={{justifyContent:'center', alignItems:'center'}}>
+      <Text style={{fontSize:24, color:'blue'}}>Testing Page</Text>
     </View>
   )
 }
 
-export default CoinTabStack
+export default ExtraTabStack
 
 const styles = StyleSheet.create({})

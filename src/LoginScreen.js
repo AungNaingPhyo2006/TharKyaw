@@ -195,9 +195,8 @@ return;
             </View>
           
              <View style={{ marginHorizontal:12, padding:15, alignItems:'center'}}>
-             <Text style={{color:'yellow', fontSize:18,marginBottom:12, fontWeight:'bold'}}>သာမဏေကျော် မေးခွန်းဟောင်းများ</Text>
-             <Text style={{color:'yellow', fontSize:18,}}>စုစည်းမှု</Text>
-
+             <Text maxFontSizeMultiplier={1.5} style={{color:'yellow', fontSize:18,marginBottom:12, fontWeight:'bold', alignSelf:'center'}}>သာမဏေကျော်မေးခွန်းဟောင်းများ </Text>
+             <Text style={{color:'yellow', fontSize:18}}>စုစည်းမှု</Text>
              <View style={{ marginTop:12}}>
              {mockData.map((item, index) => (
               <Text key={index.toString()} style={{color:'#fff', textAlign:'justify', marginTop:12}}>{item.moti}</Text>
@@ -206,8 +205,6 @@ return;
              </View>
            
             
-             
-
             <View style={{marginTop:10}}>
               <AnpButton onPress={handleSubmitPress} title="ဆက်ရန်"/>
             </View>

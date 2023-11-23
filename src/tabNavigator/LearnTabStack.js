@@ -1,7 +1,8 @@
 import { Home } from 'lucide-react-native';
-import React, { useState } from 'react';
-import { View, TextInput,  Animated, StyleSheet ,TouchableOpacity} from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { View, TextInput,  Animated, StyleSheet ,TouchableOpacity, Alert} from 'react-native';
 import AnpButton from '../utils/AnpButton';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 const LearnTabStack = ({navigation}) => {
@@ -36,6 +37,12 @@ const LearnTabStack = ({navigation}) => {
       alert('Button Pressed!');
     }
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      Alert.alert('Under Development!');
+    }, [])
+  );
 
   return (
     <View >

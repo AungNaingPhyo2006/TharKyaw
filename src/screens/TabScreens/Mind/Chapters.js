@@ -50,7 +50,7 @@ const dataSources = [
 const getDataSource = (data, extraData, vipData) => {
   for (const source of dataSources) {
     if (source.condition(data, extraData, vipData)) {
-      return source.source;
+      return source.source.reverse();
     }
   }
   return [];

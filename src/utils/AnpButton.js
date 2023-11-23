@@ -5,7 +5,7 @@ const Button = ({ onPress, title, buttonPosition }) => {
   return (
       <TouchableOpacity
         style={{
-          backgroundColor:'gray',
+         // backgroundColor:'gray',
          // backgroundColor: '#7DE24E',
           borderWidth: 1,
           color: '#FFFFFF',
@@ -17,6 +17,7 @@ const Button = ({ onPress, title, buttonPosition }) => {
           marginRight: 35,
           marginTop: 20,
           marginBottom: 25,
+          elevation: 5
         }}
         activeOpacity={0.5}
         onPress={onPress}
